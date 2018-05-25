@@ -1,3 +1,10 @@
+testsound
+*.dat
+*.sav
+adventure
+advgen
+
+bin/
 # Prerequisites
 *.d
 
