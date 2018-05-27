@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.7)
-project(FortranGames Fortran)
+project(FortranGames Fortran C)
 enable_testing()
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
@@ -9,10 +9,13 @@ else()
 endif()
 
 if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
-  add_compile_options(-march=native -Werror=array-bounds -fbacktrace -fcheck=all
+  list(APPEND FFLAGS -Werror=array-bounds -fbacktrace -fcheck=all
   -fexceptions -ffpe-trap=invalid,zero,overflow 
   -finit-real=nan
   -Wline-truncation) #-Warray-temporaries
+  
+  list(APPEND FLAGS -march=native)
+  list(APPEND CFLAGS -Wall -Wextra -Wpedantic)
   
 #  link_libraries(-fsanitize=address) Only for Linux, don't bother on CI for now.
   
@@ -22,14 +25,28 @@ if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
   
 
 elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Intel)
-  add_compile_options(-warn -fpe0 -traceback -debug extended -check all)
+  list(APPEND FFLAGS -fpe0 -traceback)
 elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Flang)  # https://github.com/flang-compiler/flang/wiki/Fortran-2008
-  add_compile_options(-Mallocatable=03 -nomp)
-  set(FFLAGS -static-flang-libs)
+  list(APPEND FFLAGS -Mallocatable=03 -nomp)
+  link_libraries(-static-flang-libs)
 elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL PGI)
-  set(FFLAGS -Mallocatable=03)
+  list(APPEND FFLAGS -Mallocatable=03)
 endif()
 
 #--------------
-
 add_executable(tictac tictac.f)
+target_compile_options(tictac PRIVATE ${FLAGS} ${FFLAGS})
+if(NOT WIN32)
+  add_test(NAME TicTacToe COMMAND bash -c "./tictac -d 6 <<< 233")
+endif()
+
+add_executable(chess chess.f)
+target_compile_options(chess PRIVATE ${FLAGS} ${FFLAGS})
+
+
+find_package(Curses)
+if(Curses_FOUND)
+  add_executable(fireworks fireworks.c)
+  target_compile_options(fireworks PRIVATE ${FLAGS} ${CFLAGS})
+  target_link_libraries(fireworks ${CURSES_LIBRARIES})
+endif()
