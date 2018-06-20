@@ -29,8 +29,6 @@ install:
     - cmake ..
     - make
     
-script:
-  - make test
+script: make test
 
-after_failure:
-  - ctest -V
+after_failure:  ctest -V

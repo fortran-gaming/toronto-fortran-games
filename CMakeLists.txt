@@ -37,7 +37,7 @@ endif()
 add_executable(tictac tictac.f)
 target_compile_options(tictac PRIVATE ${FLAGS} ${FFLAGS})
 if(NOT WIN32)
-  add_test(NAME TicTacToe COMMAND bash -c "./tictac -d 6 <<< 233")
+  add_test(NAME TicTacToe COMMAND bash -c "../tests/test_tictac.sh")
 endif()
 
 add_executable(chess chess.f)

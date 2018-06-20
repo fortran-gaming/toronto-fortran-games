@@ -1,0 +1,172 @@
+ HELLO,I AM THE APOLLO/GOULD TIC-TAC-TOE PLAYER.
+difficulty level: 6
+ WHAT IS YOUR MOVE? 
+ MY MOVE IS 144
+  - - - -     - - - -     - - - -     - - - O
+  - - - -     - - - -     - - X -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+I RECOMMEND 222
+ MY MOVE IS 244
+  - - - -     - - - -     - - - -     - - - O
+  - - - -     - X - -     - - X -     - - - O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+I RECOMMEND 444
+ MY MOVE IS 111
+  O - - -     - - - -     - - - -     - - - O
+  - - - -     - X - -     - - X -     - - - O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - X
+I RECOMMEND 232
+ MY MOVE IS 234
+  O - - -     - - - -     - - - -     - - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - X
+I RECOMMEND 414
+ MY MOVE IS 141
+  O - - O     - - - -     - - - -     - - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     X - - X
+I RECOMMEND 114
+ MY MOVE IS 121
+  O O - O     - - - -     - - - -     X - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     X - - X
+I RECOMMEND 131
+ MY MOVE IS 122
+  O O X O     - O - -     - - - -     X - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     X - - X
+I RECOMMEND 133
+ MY MOVE IS 142
+  O O X O     - O - O     - - X -     X - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     X - - X
+I RECOMMEND 143
+ MY MOVE IS 132
+  O O X O     - O O O     - - X X     X - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     X - - X
+I RECOMMEND 112
+ MY MOVE IS 123
+  O O X O     X O O O     - O X X     X - - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     X - - X
+I RECOMMEND 124
+ I MAY BE IN TROUBLE.
+ MY MOVE IS 441
+  O O X O     X O O O     - O X X     X X - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - - - -     - - - -
+  - - - O     - - - -     - - - -     X - - X
+I RECOMMEND 323
+ I'LL BLOCK YOU.
+ MY MOVE IS 413
+  O O X O     X O O O     - O X X     X X - O
+  - - - -     - X X -     - - X -     - - O O
+  - - - -     - - - -     - X - -     - - - -
+  - - - O     - - - -     O - - -     X - - X
+I RECOMMEND 224
+ I'LL BLOCK YOU.
+ MY MOVE IS 334
+  O O X O     X O O O     - O X X     X X - O
+  - - - -     - X X -     - - X -     - X O O
+  - - - -     - - - -     - X - -     - - O -
+  - - - O     - - - -     O - - -     X - - X
+I RECOMMEND 241
+ MY MOVE IS 434
+  O O X O     X O O O     - O X X     X X - O
+  - - - X     - X X -     - - X -     - X O O
+  - - - -     - - - -     - X - -     - - O -
+  - - - O     - - - -     O - - -     X - O X
+I RECOMMEND 134
+ MY MOVE IS 221
+  O O X O     X O O O     - O X X     X X X O
+  - O - X     - X X -     - - X -     - X O O
+  - - - -     - - - -     - X - -     - - O -
+  - - - O     - - - -     O - - -     X - O X
+I RECOMMEND 331
+ MY MOVE IS 321
+  O O X O     X O O O     - O X X     X X X O
+  - O - X     - X X -     - - X -     - X O O
+  - O X -     - - - -     - X - -     - - O -
+  - - - O     - - - -     O - - -     X - O X
+I RECOMMEND 421
+ MY MOVE IS 411
+  O O X O     X O O O     - O X X     X X X O
+  - O - X     - X X -     - - X -     - X O O
+  - O X -     - - - -     - X - -     - - O -
+  O X - O     - - - -     O - - -     X - O X
+I RECOMMEND 231
+ I'LL BLOCK YOU.
+ MY MOVE IS 431
+  O O X O     X O O O     - O X X     X X X O
+  - O X X     - X X -     - - X -     - X O O
+  - O X -     - - - -     - X - -     - - O -
+  O X O O     - - - -     O - - -     X - O X
+I RECOMMEND 243
+ MY MOVE IS 433
+  O O X O     X O O O     - O X X     X X X O
+  - O X X     - X X -     - - X X     - X O O
+  - O X -     - - - -     - X - -     - - O -
+  O X O O     - - - -     O - O -     X - O X
+I RECOMMEND 432
+ MY MOVE IS 443
+  O O X O     X O O O     - O X X     X X X O
+  - O X X     - X X -     - - X X     - X O O
+  - O X -     - - - -     - X - -     - - O -
+  O X O O     - - X -     O - O O     X - O X
+I RECOMMEND 423
+ MY MOVE IS 311
+  O O X O     X O O O     - O X X     X X X O
+  - O X X     - X X -     - - X X     - X O O
+  O O X -     - - - -     - X - -     - - O -
+  O X O O     - - X -     O X O O     X - O X
+I RECOMMEND 211
+ I MAY BE IN TROUBLE.
+ MY MOVE IS 223
+  O O X O     X O O O     - O X X     X X X O
+  X O X X     - X X -     - O X X     - X O O
+  O O X -     - - - -     - X - -     - - O -
+  O X O O     - - X -     O X O O     X - O X
+I RECOMMEND 332
+ I'LL BLOCK YOU.
+ MY MOVE IS 442
+  O O X O     X O O O     - O X X     X X X O
+  X O X X     - X X -     - O X X     - X O O
+  O O X -     - - X -     - X - -     - - O -
+  O X O O     - - X O     O X O O     X - O X
+I RECOMMEND 333
+ MY MOVE IS 242
+  O O X O     X O O O     - O X X     X X X O
+  X O X X     - X X O     - O X X     - X O O
+  O O X -     - - X -     - X X -     - - O -
+  O X O O     - - X O     O X O O     X - O X
+I RECOMMEND 342
+ I MAY BE IN TROUBLE.
+ MY MOVE IS 314
+  O O X O     X O O O     - O X X     X X X O
+  X O X X     - X X O     - O X X     - X O O
+  O O X -     - - X X     - X X -     O - O -
+  O X O O     - - X O     O X O O     X - O X
+I RECOMMEND 424
+ I'M IN BIG TROUBLE.
+ MY MOVE IS 422
+  O O X O     X O O O     - O X X     X X X O
+  X O X X     - X X O     - O X X     - X O O
+  O O X -     - - X X     - X X -     O - O -
+  O X O O     - O X O     O X O O     X X O X
+I RECOMMEND 324
+ CONGRATULATIONS, YOU WIN.
+  O O X O     X O O O     - O X X     X X X O
+  X O X X     - X X O     - O X X     - X O O
+  O O X -     - - X X     - X X -     O X O -
+  O X O O     - O X O     O X O O     X X O X

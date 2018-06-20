@@ -1,0 +1,53 @@
+ HELLO,I AM THE APOLLO/GOULD TIC-TAC-TOE PLAYER.
+difficulty level: 6
+ MY MOVE IS 232
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - O -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+I RECOMMEND 222
+ MY MOVE IS 322
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - X O -     - - - -     - - - -
+  - - - -     - O - -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+I RECOMMEND 332
+ MY MOVE IS 223
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - X O -     - O - -     - - - -
+  - - - -     - O X -     - - - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+I RECOMMEND 323
+ MY MOVE IS 233
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - X O -     - O O -     - - - -
+  - - - -     - O X -     - X - -     - - - -
+  - - - -     - - - -     - - - -     - - - -
+I RECOMMEND 411
+ MY MOVE IS 333
+  - - - -     - - - -     - - - -     - - - -
+  - - - -     - X O -     - O O -     - - - -
+  - - - -     - O X -     - X O -     - - - -
+  X - - -     - - - -     - - - -     - - - -
+I RECOMMEND 121
+ I'LL BLOCK YOU.
+ MY MOVE IS 424
+  - X - -     - - - -     - - - -     - - - -
+  - - - -     - X O -     - O O -     - - - -
+  - - - -     - O X -     - X O -     - - - -
+  X - - -     - - - -     - - - -     - O - -
+I RECOMMEND 341
+ I'LL BLOCK YOU.
+ MY MOVE IS 314
+  - X - -     - - - -     - - - -     - - - -
+  - - - -     - X O -     - O O -     - - - -
+  - - - X     - O X -     - X O -     O - - -
+  X - - -     - - - -     - - - -     - O - -
+I RECOMMEND 112
+ I'LL BLOCK YOU.
+ MY MOVE IS 442
+  - X - -     X - - -     - - - -     - - - -
+  - - - -     - X O -     - O O -     - - - -
+  - - - X     - O X -     - X O -     O - - -
+  X - - -     - - - O     - - - -     - O - -
+ I RECOMMEND YOU RESIGN.
