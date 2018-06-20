@@ -1,13 +1,24 @@
+      module blk
+      implicit none
+      integer :: LINE(76,4), PTLIST(64,7)
+      integer :: PTXYZ(4,4,4)
+      integer :: PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),MOVES(22,2)
+      
+      end module blk
+
+
       PROGRAM TICTAC
+      use blk, only: ptxyz, pt, moves
+      
       use, intrinsic:: iso_fortran_env, only: IOUT=>output_unit, 
      &          input_unit
-      INTEGER MOVES(22,2),LINCNT(76),LINE(76,4),VAL(64)
-      INTEGER TLEV,PT(64),FIRST
-      INTEGER OPLIN(22,13),LINLEV(22),PTXYZ(4,4,4),PTLIST(64,7)
-
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK2/PTXYZ
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+     
+      implicit none
+     
+      INTEGER VAL(64)
+      INTEGER TLEV, FIRST, i2, ibest, icall, ireply, idfend, mm, n,
+     &   next, ibest2, irply2, isave, j2, k2, level
+      
       integer, parameter :: MINE=1,HIS=4
       character(8) :: buf
       integer :: argc, i,j,k,m,idff, ios
@@ -244,14 +255,14 @@ C
       END PROGRAM
       
 C   QUBIC  -   SCORES SUBROUTINE                        HEADER  SCORES
-      SUBROUTINE SCORES (WIN,NEXT,MINE)
+      SUBROUTINE SCORES(WIN,NEXT,MINE)
+      use blk, only: pt, lincnt, line
+      implicit none
+      
       integer, intent(out) :: win, next
       integer, intent(in) :: mine
-      INTEGER MOVES(22,2)
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      INTEGER SCORE,WON ,PTLIST(64,7)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+
+      INTEGER SCORE,WON , i, j, ix, ibad, lose, none, nscore
 C
 C   EVALUATES STATUS OF ALL LINES FROM THE VIEWPOINT OF THE CALLING
 C   PLAYER, AND ALARMS ANY CRITICAL CONDITIONS.
@@ -317,13 +328,15 @@ C   REMOVED FROM THE BOARD, BUT ARE LISTED IN THE MOVES ARRAY.
 C   AN ARBITRARY LIMIT OF 26 FORCING MOVES AT ONE TIME, AND/OR
 C   20 FORCING MOVES IN SEQUENCE, HAS BEEN SPECIFIED.    EXCEEDING THESE
 C   WILL CUASE AN ABORT FOR INSUFFICIENT MEMORY
-C
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      INTEGER HIS,TLEV,TPT,MODE(22),TEMPT(2),TLINE
-      INTEGER MOVES(22,2)
-      INTEGER PTLIST(64,7)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+      use blk, only: linlev, moves, pt, oplin, line, ptlist, lincnt
+      implicit none
+      integer, intent(in) :: mine, idff
+      integer, intent(out) :: tlev, M
+      integer, intent(inout) :: next
+      
+      INTEGER :: HIS,TPT,MODE(22),TEMPT(2),TLINE, I, I2, IX, IY, IZ, K,
+     &   NUMLIN
+
       HIS=5-MINE
       TLEV=1
 C     FORCED WIN SEARCH BEGINS  HERE
@@ -418,11 +431,10 @@ C   QUBIC  -   TWOCNT SUBROUTINE                        HEADER  TWOCNT
       SUBROUTINE TWOCNT(LEVEL)
 C
 C   MAKES LIST OF ALL 2-IN-A-ROWS FOR CALLING PLAYER.
-C
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      INTEGER MOVES(22,2) ,PTLIST(64,7)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+      use blk, only: linlev, oplin, lincnt
+      implicit none
+      integer, intent(in) :: level
+      integer :: i, ix
       IX=0
       DO I=1,76
          IF(LINCNT(I).NE.  2) cycle
@@ -431,14 +443,14 @@ C
       enddo
       LINLEV(LEVEL)=IX
       END SUBROUTINE TWOCNT
-C   QUBIC  -   ADDLIN SUBROUTINE                        HEADER  ADDLIN
+      
+      
       SUBROUTINE ADDLIN(IZ,TLEV)
 C   FOR A SPECIFIED POINT, ADD ALL LINES THRU THE POINT, WHICH ARE 2-IN-
-      INTEGER MOVES(22,2)
-      INTEGER TLEV,PTLIST(64,7)
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+      use blk, only: linlev, oplin, ptlist, lincnt
+      implicit none
+      INTEGER TLEV,iz,i3,ix,k1,mmln2,nmln2
+
       NMLN2=4
       IF(IZ.LE.16)NMLN2=7
       DO I3=1,NMLN2
@@ -452,15 +464,13 @@ C   FOR A SPECIFIED POINT, ADD ALL LINES THRU THE POINT, WHICH ARE 2-IN-
       
 C   QUBIC  -   VALUE  SUBROUTINE                        HEADER  VALUE
       SUBROUTINE VALUE(VAL,MINE)
+      use blk, only: pt, ptlist, lincnt
         implicit none
         integer, intent(out) :: VAL(64)
         integer, intent(in) :: mine
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      INTEGER MOVES(22,2) ,PTLIST(64,7)
+
       integer :: i, ii, ix, nodif, numlin
       
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
       CALL SCORES(NODIF,NODIF,MINE)
       
       do I=1,64
@@ -482,15 +492,14 @@ C   QUBIC  -   VALUE  SUBROUTINE                        HEADER  VALUE
       
 C   QUBIC  -   IDFEND FUNCTION                          HEADER  IDFEND
       Integer FUNCTION IDFEND(N,IDFF,K)
+      use blk, only: pt
       implicit none
 C   FOR ANY LEGAL MOVE,WHAT IS THE VALUE OF THE BEST NON-LOSING REPLY.
       integer, intent(in) :: N, IDFF
       integer, intent(out) :: K
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      INTEGER PTLIST(64,7),MOVES(22,2),DVAL(64)
+      integer ::DVAL(64)
       integer :: i, next
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+
       
       PT(N)=1
       CALL VALUE(DVAL,4)
@@ -510,10 +519,13 @@ C   FOR ANY LEGAL MOVE,WHAT IS THE VALUE OF THE BEST NON-LOSING REPLY.
 C   QUBIC  -   LOSE   SUBROUTINE                        HEADER  LOSE
       SUBROUTINE LOSE(HIS,MM,VAL,NEXT,IDFF)
 C   IS THIS A LOSING MOVE FOR THE CALLING PLAYER ?
-      INTEGER PTLIST(64,7),MOVES(22,2),TLEV,HIS,VAL(64)
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
+      use blk, only: pt, moves
+      implicit none
+      integer, intent(in) :: his, mm, idff
+      integer, intent(inout) :: val(64)
+      integer, intent(out) :: next
+      INTEGER tlev, i2, j2, k2, mine, nodif
+
       MINE =5-HIS
       PT(MM)=MINE
       CALL SCORES(NODIF,NEXT,HIS)
@@ -531,14 +543,15 @@ C   IS THIS A LOSING MOVE FOR THE CALLING PLAYER ?
       
 C   QUBIC  -   BOARD  SUBROUTINE                        HEADER  BOARD
       SUBROUTINE BOARD
+      use blk, only: pt, line
       use, intrinsic:: iso_fortran_env, only: IOUT=>output_unit
-      IMPLICIT INTEGER (A-Z)
+      IMPLICIT none
+      
+      integer :: i, j, k
       character :: IOBUF(16)
-      INTEGER PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),LINE(76,4)
-      INTEGER PTLIST(64,7),MOVES(22,2)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK3/PT,LINLEV,LINCNT,OPLIN,MOVES
       character, parameter :: LETDSH="-",LETEKS="O",LETOH="X"
+      
+      
       DO I=1,4
         DO J=1,16
           K=LINE(J,I)
@@ -553,9 +566,8 @@ C   QUBIC  -   BOARD  SUBROUTINE                        HEADER  BOARD
       
 C   QUBIC  -   SETUP  SUBROUTINE                        HEADER  SETUP
       SUBROUTINE SETUP(N)
-      INTEGER PTXYZ(4,4,4),PTLIST(64,7),LINE(76,4)
-      COMMON/BLK1/LINE,PTLIST
-      COMMON/BLK2/PTXYZ
+      use blk, only: ptlist, line, ptxyz
+      implicit none
       integer :: i,j,k,n,m, argc
       logical :: help=.false.
       character(8) :: buf
