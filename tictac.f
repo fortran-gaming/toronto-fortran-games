@@ -661,8 +661,8 @@ C     NEXT THE  LINES FOR EACH POINT ARE DETERMINED.
       
       print *,"THE GAME IS PLAYED IN A 4 X 4 X 4 CUBE."
       print *,"EACH MOVE IS INDICATED BY A 3 DIGIT NUMBER."
-      print *, "THE DIGITS CORRESPOND TO THE ROW, COLUMN, AND LEVEL."
-      print *,''
+      print *, "THE DIGITS CORRESPOND TO THE ROW, COLUMN, AND LEVEL.", 
+     &         new_line('')
       
       print *, "Difficulty selection at command line: -d 1 and so on:"
       print *, "1. AVERAGE GAME"
@@ -670,13 +670,11 @@ C     NEXT THE  LINES FOR EACH POINT ARE DETERMINED.
       print *, "3. STRONG OFFENSE"
       print *, "4. BOTH 2 AND 3"
       print *, "5. MAXIMUM GAME"
-      print *, "6. ON AUTOMATIC"
-      print *,''
+      print *, "6. ON AUTOMATIC", new_line('')
       
       print *, 'During gameplay:'
       print *, " X is You"
-      print *, " O is Computer."
-      print *,''
+      print *, " O is Computer.", new_line('')
       
       print *, "During the game, special inputs:"
       print *, "6: GET ADVICE"

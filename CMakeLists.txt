@@ -19,7 +19,7 @@ if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
   
 #  link_libraries(-fsanitize=address) Only for Linux, don't bother on CI for now.
   
-  if(NOT CYGWIN AND NOT WIN32)
+  if(UNIX AND NOT (APPLE OR CYGWIN))
     add_compile_options(-fstack-protector-all)
   endif()
   

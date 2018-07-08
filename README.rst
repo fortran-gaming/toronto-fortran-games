@@ -23,8 +23,10 @@ Build
 ::
 
     cd bin
+    
     cmake ..
-    make
+    
+    cmake --build .
     
 Play
 ====
