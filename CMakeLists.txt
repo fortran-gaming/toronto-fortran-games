@@ -23,6 +23,10 @@ if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
     add_compile_options(-fstack-protector-all)
   endif()
   
+  if(${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 8.1)
+    list(APPEND FFLAGS -std=legacy)
+  endif()
+  
 
 elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Intel)
   list(APPEND FFLAGS -fpe0 -traceback)
