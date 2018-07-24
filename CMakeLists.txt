@@ -2,6 +2,12 @@ cmake_minimum_required (VERSION 3.7)
 project(TorontoFortranGames Fortran C)
 enable_testing()
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  if(UNIX)
+    set(CMAKE_INSTALL_PREFIX "~/.local/bin" CACHE PATH "..." FORCE)
+  endif()
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
   add_compile_options(-g -O0)
 else()
@@ -53,4 +59,10 @@ if(Curses_FOUND)
   add_executable(fireworks fireworks.c)
   target_compile_options(fireworks PRIVATE ${FLAGS} ${CFLAGS})
   target_link_libraries(fireworks ${CURSES_LIBRARIES})
+install(TARGETS fireworks
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
 endif()
+
+install(TARGETS tictac chess
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+
