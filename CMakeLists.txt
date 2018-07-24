@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.7)
-project(FortranGames Fortran C)
+project(TorontoFortranGames Fortran C)
 enable_testing()
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
