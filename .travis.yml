@@ -17,10 +17,11 @@ matrix:
   include:
   - os: linux
   - os: osx
-    - brew update > /dev/null;
-    - brew install gcc > /dev/null;
+    install:
+    - brew update > /dev/null
+    - brew install gcc > /dev/null
   - os: windows
-    install: 
+    install:
     - cd build
     - cmake -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" ..
     - cmake --build .
