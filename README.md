@@ -18,25 +18,24 @@ Authors include:
 
 ## Build
 
-    cd bin
+```sh
+cd build
 
-    cmake ..
+cmake ..
 
-    cmake --build .
+cmake --build .
+```
 
 ## Play
 
-Run any of the executables created in bin/ for example:
-
-    ./tictac
+Tic tac toe: `./tictac`
 
 Chess has a bug where the numbers for rows are reversed if you don't take the first move:
+```sh
+./chess
+```
 
-    ./chess
-
-and a demonstration of Ncurses from C:
-
-    ./fireworks
+Demonstration of Ncurses from C: `./fireworks`
 
 ## Notes
 
