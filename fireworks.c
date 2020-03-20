@@ -15,7 +15,7 @@
 
 #define DELAYSIZE 100000	/* delay counter */
 
-int main()
+int main(void)
 {
 	int start;		/* starting column (bottom row) */
 	int end;		/* ending column */
@@ -73,7 +73,7 @@ int col;
 {
 
   void myrefresh();
-  
+
 	clear();
 	mvprintw(row  , col  , "-");		/* step 1 */
 	myrefresh();
@@ -105,7 +105,7 @@ int col;
 	mvprintw(row+1, col-2, "#   #");
 	mvprintw(row+2, col-2, " # # ");
 	myrefresh();
-	
+
 }
 
 void myrefresh()

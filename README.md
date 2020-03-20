@@ -1,8 +1,6 @@
-[![Travis-CI](https://travis-ci.com/fortran-gaming/toronto-fortran-games.svg?branch=master)](https://travis-ci.com/fortran-gaming/toronto-fortran-games)
-[![Build status](https://ci.appveyor.com/api/projects/status/3k9qyew24locio2q?svg=true)](https://ci.appveyor.com/project/scivision/toronto-fortran-games)
-
-
 # Toronto Fortran Games
+
+![Travis-CI](https://travis-ci.com/fortran-gaming/toronto-fortran-games.svg?branch=master)
 
 From <http://freshmeat.sourceforge.net/projects/fortran-games>
 
@@ -19,11 +17,9 @@ Authors include:
 ## Build
 
 ```sh
-cd build
+cmake -B build
 
-cmake ..
-
-cmake --build .
+cmake --build build
 ```
 
 ## Play
@@ -31,6 +27,7 @@ cmake --build .
 Tic tac toe: `./tictac`
 
 Chess has a bug where the numbers for rows are reversed if you don't take the first move:
+
 ```sh
 ./chess
 ```

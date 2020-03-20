@@ -13,11 +13,12 @@ init:
 - cmd: set PATH=%MINGW_DIR%;%PATH%
 
 install:
+- cmd: cinst -y ninja
+- cmd: cmake -G Ninja -B build
+- sh: cmake -B build
+
+- cmake --build build
+
+test_script:
 - cd build
-- cmd: cmake -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" ..
-- sh: cmake ..
-
-- cmake --build . --target install
-
-test_script: ctest --output-on-failure
-
+- ctest --output-on-failure

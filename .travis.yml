@@ -1,11 +1,10 @@
 language: c
 group: travis_latest
-dist: xenial
 
 git:
-  depth: 3
+  depth: 25
   quiet: true
-  
+
 env: FC=gfortran
 
 addons:
@@ -22,14 +21,14 @@ matrix:
     - brew install gcc > /dev/null
   - os: windows
     install:
-    - cd build
-    - cmake -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" ..
-    - cmake --build .
+    - cinst -y ninja
+    - cmake -G Ninja -B build
+    - cmake --build build
 
 install:
+- cmake -B build
+- cmake --build build
+
+script:
 - cd build
-- cmake ..
-- cmake --build .
-
-script: ctest --output-on-failure
-
+- ctest --output-on-failure

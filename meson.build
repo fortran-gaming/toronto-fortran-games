@@ -1,4 +1,5 @@
-project('TorontoFortranGames', 'fortran', 'c', default_options : ['default_library=static'])
+project('TorontoFortranGames', 'fortran', 'c',
+  default_options : ['default_library=static', 'buildtype=release'])
 
 #--------------
 tictac_exe = executable('tictac', 'tictac.f')

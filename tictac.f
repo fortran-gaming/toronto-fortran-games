@@ -3,35 +3,35 @@
       integer :: LINE(76,4), PTLIST(64,7)
       integer :: PTXYZ(4,4,4)
       integer :: PT(64),LINLEV(22),LINCNT(76),OPLIN(22,13),MOVES(22,2)
-      
+
       end module blk
 
 
       PROGRAM TICTAC
       use blk, only: ptxyz, pt, moves
-      
-      use, intrinsic:: iso_fortran_env, only: IOUT=>output_unit, 
+
+      use, intrinsic:: iso_fortran_env, only: IOUT=>output_unit,
      &          input_unit
-     
+
       implicit none
-     
+
       INTEGER VAL(64)
       INTEGER TLEV, FIRST, i2, ibest, icall, ireply, idfend, mm, n,
      &   next, ibest2, irply2, isave, j2, k2, level
-      
+
       integer, parameter :: MINE=1,HIS=4
       character(8) :: buf
       integer :: argc, i,j,k,m,idff, ios
       real :: r
-      
-      ptxyz = reshape( 
+
+      ptxyz = reshape(
      &  [1, 17,18,3,
      &   19,20,21,22,
      &   23,24,25,26,
      &   5,27,28,7,
 
      & 29,30,31,32,
-     & 33,2,4,34, 
+     & 33,2,4,34,
      & 35,6,8,36,
      & 37,38,39,40,
 
@@ -84,12 +84,12 @@ C
           exit
         endif
       enddo
-      
+
       print '(A,I1)','difficulty level: ',IDFF
-      
+
       ! who goes first
       call random_number(r)
-      
+
       if (r>0.5) GOTO 401
       goto 408
 C
@@ -99,13 +99,17 @@ C
 401   print *, 'WHAT IS YOUR MOVE? '
       i=0; j=0; k=0
       READ(input_unit,'(3I1)', iostat=ios) I,J,K
-      if (ios/=0) goto 401
-      
+      if (IS_IOSTAT_END(ios)) then
+        stop
+      elseif (ios/=0) then
+        goto 401
+      endif
+
       select case (i)
         case (1,2,3,4)
           if (any([j,k]<1).or.any([j,k]>4)) goto 401
           GO TO 404 ! normal
-        case (6) 
+        case (6)
           if (M==0) then ! very first move of game
             print *,'surprise me'
             goto 401
@@ -129,7 +133,7 @@ C
 820   print *, 'I RECOMMEND YOU RESIGN.'
       IF(IDFF < 6)GO TO 401
       stop
-      
+
 830   IBEST=IDFEND(M,IDFF,IREPLY)
       PT(M)=MINE
       IF(IBEST)820,800,800
@@ -155,7 +159,7 @@ C
       ICALL=3
       GOTO 592
 460   print '(A,3I1)', ' MY MOVE IS ',I,J,K
-      
+
       CALL BOARD
       IF(IDFF.EQ.6)GO TO 402
       GO TO 401
@@ -253,12 +257,12 @@ C
 100   FORMAT(' YOU''RE IN BIG TROUBLE.')
 1041  FORMAT(' I MAY BE IN TROUBLE.')
       END PROGRAM
-      
+
 C   QUBIC  -   SCORES SUBROUTINE                        HEADER  SCORES
       SUBROUTINE SCORES(WIN,NEXT,MINE)
       use blk, only: pt, lincnt, line
       implicit none
-      
+
       integer, intent(out) :: win, next
       integer, intent(in) :: mine
 
@@ -317,7 +321,7 @@ C                     -      NEXT = 6,  GAME IS LOST
 300   NEXT=6
 
       END SUBROUTINE SCORES
-      
+
 C   QUBIC  -   FORCE  SUBROUTINE                        HEADER  FORCE
       SUBROUTINE FORCE(MINE, IDFF,TLEV,M,NEXT)
 C
@@ -333,7 +337,7 @@ C   WILL CUASE AN ABORT FOR INSUFFICIENT MEMORY
       integer, intent(in) :: mine, idff
       integer, intent(out) :: tlev, M
       integer, intent(inout) :: next
-      
+
       INTEGER :: HIS,TPT,MODE(22),TEMPT(2),TLINE, I, I2, IX, IY, IZ, K,
      &   NUMLIN
 
@@ -426,7 +430,7 @@ C
 610   NEXT=3
 
       END SUBROUTINE FORCE
-      
+
 C   QUBIC  -   TWOCNT SUBROUTINE                        HEADER  TWOCNT
       SUBROUTINE TWOCNT(LEVEL)
 C
@@ -443,8 +447,8 @@ C   MAKES LIST OF ALL 2-IN-A-ROWS FOR CALLING PLAYER.
       enddo
       LINLEV(LEVEL)=IX
       END SUBROUTINE TWOCNT
-      
-      
+
+
       SUBROUTINE ADDLIN(IZ,TLEV)
 C   FOR A SPECIFIED POINT, ADD ALL LINES THRU THE POINT, WHICH ARE 2-IN-
       use blk, only: linlev, oplin, ptlist, lincnt
@@ -461,7 +465,7 @@ C   FOR A SPECIFIED POINT, ADD ALL LINES THRU THE POINT, WHICH ARE 2-IN-
         OPLIN(TLEV,IX)=K1
       enddo
       END SUBROUTINE ADDLIN
-      
+
 C   QUBIC  -   VALUE  SUBROUTINE                        HEADER  VALUE
       SUBROUTINE VALUE(VAL,MINE)
       use blk, only: pt, ptlist, lincnt
@@ -470,9 +474,9 @@ C   QUBIC  -   VALUE  SUBROUTINE                        HEADER  VALUE
         integer, intent(in) :: mine
 
       integer :: i, ii, ix, nodif, numlin
-      
+
       CALL SCORES(NODIF,NODIF,MINE)
-      
+
       do I=1,64
          VAL(I)=0
          IF(PT(I).EQ.0)GO TO 710
@@ -489,7 +493,7 @@ C   QUBIC  -   VALUE  SUBROUTINE                        HEADER  VALUE
         enddo
       end do
       END SUBROUTINE VALUE
-      
+
 C   QUBIC  -   IDFEND FUNCTION                          HEADER  IDFEND
       Integer FUNCTION IDFEND(N,IDFF,K)
       use blk, only: pt
@@ -500,7 +504,7 @@ C   FOR ANY LEGAL MOVE,WHAT IS THE VALUE OF THE BEST NON-LOSING REPLY.
       integer ::DVAL(64)
       integer :: i, next
 
-      
+
       PT(N)=1
       CALL VALUE(DVAL,4)
 20    K=1
@@ -515,7 +519,7 @@ C   FOR ANY LEGAL MOVE,WHAT IS THE VALUE OF THE BEST NON-LOSING REPLY.
 30    PT(N)=0
       IDFEND=DVAL(K)
       END FUNCTION IDFEND
-      
+
 C   QUBIC  -   LOSE   SUBROUTINE                        HEADER  LOSE
       SUBROUTINE LOSE(HIS,MM,VAL,NEXT,IDFF)
 C   IS THIS A LOSING MOVE FOR THE CALLING PLAYER ?
@@ -540,18 +544,18 @@ C   IS THIS A LOSING MOVE FOR THE CALLING PLAYER ?
 4215  VAL(MM)=-100
 4300  PT(MM)=0
 680   END SUBROUTINE LOSE
-      
+
 C   QUBIC  -   BOARD  SUBROUTINE                        HEADER  BOARD
       SUBROUTINE BOARD
       use blk, only: pt, line
       use, intrinsic:: iso_fortran_env, only: IOUT=>output_unit
       IMPLICIT none
-      
+
       integer :: i, j, k
       character :: IOBUF(16)
       character, parameter :: LETDSH="-",LETEKS="O",LETOH="X"
-      
-      
+
+
       DO I=1,4
         DO J=1,16
           K=LINE(J,I)
@@ -563,7 +567,7 @@ C   QUBIC  -   BOARD  SUBROUTINE                        HEADER  BOARD
       enddo
 1100  FORMAT(1H ,4(4A2,4X))
       END SUBROUTINE BOARD
-      
+
 C   QUBIC  -   SETUP  SUBROUTINE                        HEADER  SETUP
       SUBROUTINE SETUP(N)
       use blk, only: ptlist, line, ptxyz
@@ -658,12 +662,12 @@ C     NEXT THE  LINES FOR EACH POINT ARE DETERMINED.
       enddo
 
       IF (.not.help) RETURN
-      
+
       print *,"THE GAME IS PLAYED IN A 4 X 4 X 4 CUBE."
       print *,"EACH MOVE IS INDICATED BY A 3 DIGIT NUMBER."
-      print *, "THE DIGITS CORRESPOND TO THE ROW, COLUMN, AND LEVEL.", 
+      print *, "THE DIGITS CORRESPOND TO THE ROW, COLUMN, AND LEVEL.",
      &         new_line('')
-      
+
       print *, "Difficulty selection at command line: -d 1 and so on:"
       print *, "1. AVERAGE GAME"
       print *, "2. STRONG DEFENSE"
@@ -671,11 +675,11 @@ C     NEXT THE  LINES FOR EACH POINT ARE DETERMINED.
       print *, "4. BOTH 2 AND 3"
       print *, "5. MAXIMUM GAME"
       print *, "6. ON AUTOMATIC", new_line('')
-      
+
       print *, 'During gameplay:'
       print *, " X is You"
       print *, " O is Computer.", new_line('')
-      
+
       print *, "During the game, special inputs:"
       print *, "6: GET ADVICE"
       print *, "7: RESIGN"
