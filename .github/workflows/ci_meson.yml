@@ -51,7 +51,7 @@ jobs:
 
     - run: |
         pip install meson
-        brew install gcc ninja
+        brew install pkg-config gcc ninja
 
     - run: meson setup build
       env:

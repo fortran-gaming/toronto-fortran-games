@@ -14,8 +14,6 @@ endif()
 
 add_executable(chess chess.f)
 
-
-find_package(Curses)
 if(Curses_FOUND)
   add_executable(fireworks fireworks.c)
   target_link_libraries(fireworks ${CURSES_LIBRARIES})
@@ -26,4 +24,3 @@ endif()
 
 install(TARGETS tictac chess
         RUNTIME DESTINATION bin)
-
