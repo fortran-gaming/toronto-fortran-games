@@ -1,6 +1,7 @@
 # Toronto Fortran Games
 
-![Travis-CI](https://travis-ci.com/fortran-gaming/toronto-fortran-games.svg?branch=master)
+![Actions Status](https://github.com/fortran-gaming/toronto-fortran-games/workflows/ci_meson/badge.svg)
+![Actions Status](https://github.com/fortran-gaming/toronto-fortran-games/workflows/ci_cmake/badge.svg)
 
 From <http://freshmeat.sourceforge.net/projects/fortran-games>
 
