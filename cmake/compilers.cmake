@@ -1,5 +1,3 @@
 
-if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
-  add_compile_options(-mtune=native
-    "$<$<COMPILE_LANGUAGE:Fortran>:-w;-std=legacy;-Wline-truncation>")
-endif()
+add_compile_options(
+"$<$<COMPILE_LANG_AND_ID:Fortran,GNU>:-std=legacy;-Werror=line-truncation>")
